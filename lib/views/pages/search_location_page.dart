@@ -49,28 +49,32 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             ),
           ),
-          FutureBuilder(
-            future: _locationController.text.length > 2
-                ? fetchLocations(_locationController.text)
-                : null,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
-              } else if (snapshot.hasData) {
-                if (snapshot.data?.result != null) {
-                  return Column(
-                    children: [
-                      for (Result result in snapshot.data!.result!) ...<Widget>[
-                        Text(result.name!),
-                      ],
-                    ],
-                  );
+          Expanded(
+            child: FutureBuilder(
+              future: _locationController.text.length > 2
+                  ? fetchLocations(_locationController.text)
+                  : null,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasData) {
+                  if (snapshot.data?.result != null) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.result!.length,
+                      itemBuilder: (context, index) {
+                        Result result = snapshot.data!.result![index];
+                        return ListTile(
+                          title: Text(result.name!),
+                        );
+                      },
+                    );
+                  }
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('ERROR'));
                 }
-              } else if (snapshot.hasError) {
-                return Text('ERROR');
-              }
-              return Container();
-            },
+                return Container();
+              },
+            ),
           ),
         ],
       ),
