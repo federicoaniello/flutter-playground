@@ -49,6 +49,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             ),
           ),
+          SizedBox(height: 10,),
           Expanded(
             child: FutureBuilder(
               future: _locationController.text.length > 2
