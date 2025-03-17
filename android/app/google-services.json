@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58158833203",
+    "project_id": "flutter-app-d644e",
+    "storage_bucket": "flutter-app-d644e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58158833203:android:b63a88beb852bc76678d46",
+        "android_client_info": {
+          "package_name": "com.example.playground"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4AOZxmM8NCU3UJ-j6c_jT0hBIWfejY5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
