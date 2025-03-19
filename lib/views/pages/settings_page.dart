@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playground/views/pages/expanded_page.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key, required this.title});
-
-  final String title;
+  const SettingsPage({super.key});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -19,14 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // /automaticallyImplyLeading: false,
-        title: Text(widget.title),
-
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -187,7 +178,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

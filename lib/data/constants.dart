@@ -26,3 +26,5 @@ class KSettingsMenu {
 }
 
 final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+
+

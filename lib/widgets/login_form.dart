@@ -63,7 +63,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
       if (mounted) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => WidgetTree()),
+          MaterialPageRoute(builder: (_) => WidgetTree(title: 'Home')),
           (route) => false,
         );
       }

@@ -1,30 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:playground/data/constants.dart';
+import 'package:playground/data/navbar_pages.dart';
 import 'package:playground/data/notifiers.dart';
-import 'package:playground/views/pages/home_page.dart';
-import 'package:playground/views/pages/profile_page.dart';
-import 'package:playground/views/pages/search_location_page.dart';
-import 'package:playground/views/pages/settings_page.dart';
 import 'package:playground/views/pages/welcome_page.dart';
 import 'package:playground/widgets/navbar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-List<Widget> pages = [
-  HomePage(),
-  ProfilePage(),
-  SettingsPage(title: 'Settings'),
-  SearchLocationPage()
-];
+
 
 class WidgetTree extends StatelessWidget {
-  const WidgetTree({super.key});
+  const WidgetTree({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: ValueListenableBuilder(
+        valueListenable: selectedPageNotifier,
+        builder: (context, selectedPage, child) {
+          return Text(pages.elementAt(selectedPage).title);
+        },
+      ),
         centerTitle: true,
         actions: [
           ValueListenableBuilder(
@@ -64,16 +62,16 @@ class WidgetTree extends StatelessWidget {
                         TextButton(
                           onPressed: () async {
                             await FirebaseAuth.instance.signOut();
-                            if(context.mounted){
+                            if (context.mounted) {
                               Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return WelcomePage();
-                                },
-                              ),
-                              (route) => false,
-                            );
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return WelcomePage();
+                                  },
+                                ),
+                                (route) => false,
+                              );
                             }
                           },
                           child: Text('Yes'),
@@ -93,17 +91,16 @@ class WidgetTree extends StatelessWidget {
               ];
             },
           ),
-          
+
           CircleAvatar(
             backgroundImage: AssetImage('assets/images/wallpaper.jpg'),
-
-          )
+          ),
         ],
       ),
       body: ValueListenableBuilder(
         valueListenable: selectedPageNotifier,
         builder: (context, selectedPage, child) {
-          return pages.elementAt(selectedPage);
+          return pages.elementAt(selectedPage).page;
         },
       ),
       bottomNavigationBar: NavBarWidget(),
